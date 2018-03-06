@@ -22,9 +22,11 @@ defmodule RicoPing.Mixfile do
     [
       {:riak_core    , github: "efcasado/riak_core"     , branch: "disable-warnings-as-errors"},
       {:riak_ensemble, github: "lasp-lang/riak_ensemble", branch: "develop", override: true},
-      {:lager        , "~>3.2"      , override: true},
+      {:lager        , "~>3.2", override: true},
       {:cuttlefish   , github: "lasp-lang/cuttlefish"   , branch: "develop", override: true},
       {:poolboy      , github: "basho/poolboy"          , branch: "develop", override: true},
+      # Release
+      {:distillery, "~> 1.5"},
     ]
   end
 end

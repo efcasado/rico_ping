@@ -15,3 +15,7 @@ ring_data_dir/
 data/
 data_root/
 log/
+archives/
+packages/
+rebar
+rebar3
