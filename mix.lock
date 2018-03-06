@@ -17,7 +17,7 @@
   "parse_trans": {:hex, :parse_trans, "2.9.0", "3f5f7b402928fb9fd200c891e635de909045d1efac40ce3f924d3892898f85eb", [:rebar], [{:edown, "> 0.0.0", [hex: :edown, repo: "hexpm", optional: false]}], "hexpm"},
   "pbkdf2": {:hex, :pbkdf2, "2.0.0", "11c23279fded5c0027ab3996cfae77805521d7ef4babde2bd7ec04a9086cf499", [:rebar3], [], "hexpm"},
   "poolboy": {:git, "https://github.com/basho/poolboy.git", "25ec551577b10c6689ede0f6ecc38fe9413adb5a", [branch: "develop"]},
-  "riak_core": {:git, "https://github.com/efcasado/riak_core.git", "f3f1231413c7afd914042ca370ca5d759fdd18d8", [branch: "disable-warnings-as-errors"]},
+  "riak_core": {:git, "https://github.com/efcasado/riak_core.git", "679874d4a5564213264ee4d3bf198a8be117ffd4", [branch: "saner-default-for-schema-dir"]},
   "riak_ensemble": {:git, "https://github.com/lasp-lang/riak_ensemble.git", "1ebdae3c26f7a33a7223b07dd822e83ca8c733f1", [branch: "develop"]},
   "riak_sysmon": {:hex, :riak_sysmon, "2.1.5", "2331bbcaebe73ea7b2449f4c765827142476cc73d7d86999b4209ee005694d6b", [:rebar3], [], "hexpm"},
   "setup": {:hex, :setup, "1.7.0", "15df8e57c6df9755e22bfb1aef0c640bd97e9889396fdfb2a85a5536a9043674", [:rebar3], [], "hexpm"}}

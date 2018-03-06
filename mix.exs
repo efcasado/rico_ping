@@ -20,7 +20,7 @@ defmodule RicoPing.Mixfile do
 
   defp deps do
     [
-      {:riak_core    , github: "efcasado/riak_core"     , branch: "disable-warnings-as-errors"},
+      {:riak_core    , github: "efcasado/riak_core"     , branch: "saner-default-for-schema-dir"},
       {:riak_ensemble, github: "lasp-lang/riak_ensemble", branch: "develop", override: true},
       {:lager        , "~>3.2", override: true},
       {:cuttlefish   , github: "lasp-lang/cuttlefish"   , branch: "develop", override: true},
