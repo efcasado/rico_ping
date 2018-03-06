@@ -1,0 +1,17 @@
+/_build/
+/cover/
+/deps/
+/doc/
+/.fetch
+erl_crash.dump
+*.ez
+*.
+*~
+*.ets
+*.dets
+.#*
+\#*
+ring_data_dir/
+data/
+data_root/
+log/
