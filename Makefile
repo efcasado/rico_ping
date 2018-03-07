@@ -24,7 +24,7 @@ DKR_RUN_OPTS  ?= -v "$(PWD):/$(PWD)" \
 ##== Macros ===============================================================
 ifeq ($(strip $(USE_DOCKER)),1)
 define BIN
-	@docker run $(DKR_RUN_OPTS) $(DKR_IMAGE) $(1)
+	@docker run $(DKR_RUN_OPTS) -it $(DKR_IMAGE) $(1)
 endef
 else
 define BIN
