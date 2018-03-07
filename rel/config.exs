@@ -31,12 +31,14 @@ environment :dev do
   set dev_mode: true
   set include_erts: false
   set cookie: :"qBcp(laEPwd}&~$./uyd>:WuEPAHKpPEW}$dz|yd)tI*7!`<zu5E;%d:QP1iQwIl"
+  set vm_args: "rel/vm.args"
 end
 
 environment :prod do
   set include_erts: true
   set include_src: false
   set cookie: :"6/TElcrN@%57B{@EE;ti`/:}vq@[:AqB0_5(}Pwir|hBe;KnRv>eTHC9@Jyp*2om"
+  set vm_args: "rel/vm.args"
 end
 
 # You may define one or more releases in this file.
