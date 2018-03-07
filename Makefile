@@ -17,6 +17,7 @@ DKR_IMAGE     ?= elixir:1.5
 DKR_RUN_OPTS  ?= -v "$(PWD):/$(PWD)" \
  -e "HEX_HOME=$(PWD)"                \
  -e "MIX_HOME=$(PWD)"                \
+ -e "MIX_ENV=$(MIX_ENV)"             \
  -w "/$(PWD)"                        \
  --rm
 
