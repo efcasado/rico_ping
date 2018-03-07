@@ -78,7 +78,7 @@ console:
 package: package-docker
 
 package-docker:
-	docker build --build-arg DKR_IMAGE=$(DKR_IMAGE) --build-arg MIX_ENV=$(MIX_ENV) .
+	docker build -t rico_ping --build-arg DKR_IMAGE=$(DKR_IMAGE) --build-arg MIX_ENV=$(MIX_ENV) .
 
 clean:
 	rm -rf data_root
