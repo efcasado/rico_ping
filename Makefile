@@ -80,7 +80,9 @@ shell:
 console:
 	$(call BIN, _build/$(MIX_ENV)/rel/rico_ping/bin/rico_ping console)
 
-package: package-docker
+package: clean
+	USE_DOCKER=1 MIX_ENV=prod $(MAKE) all
+	MIX_ENV=prod $(MAKE) package-docker
 
 package-docker:
 	docker build               \
@@ -100,8 +102,11 @@ up:
                   --network rico_ping                 \
                   --network-alias rico_ping$$i.local  \
                   --hostname rico_ping$$i.local       \
+                  -p 808$$i:8080                      \
                   rico_ping:latest ;                  \
 	done
+
+	sleep 5
 
 	@for i in {2..$(CLUSTER_SIZE)}; do            \
 		docker exec                           \
@@ -110,23 +115,24 @@ up:
 	done
 
 ringready:
-	docker exec \
+	@docker exec \
 rico_ping1          \
 /opt/rico_ping/bin/rico_ping rpc riak_core_status ringready
 
 ring:
-	docker exec \
+	@docker exec \
 rico_ping1          \
-/opt/rico_ping/bin/rico_ping rpc riak_core_ring_manager get_my_ring
+/opt/rico_ping/bin/rico_ping rpc 'Elixir.RicoPing' ring
 
 
 down:
-	-for i in {1..$(CLUSTER_SIZE)}; do docker rm -f rico_ping$$i; done
+	-@for i in {1..$(CLUSTER_SIZE)}; do docker rm -f rico_ping$$i; done
 	-docker network rm rico_ping
 
 clean: clean-data
-	rm -rf _build/
 	$(call MIX, deps.clean --all)
+	rm -rf deps/
+	rm -rf _build/
 
 clean-data:
 	rm -rf data_root

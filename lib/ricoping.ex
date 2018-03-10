@@ -16,6 +16,11 @@ defmodule RicoPing do
     :riak_core_vnode_master.sync_spawn_command(node, :ping, RicoPing.VNode_master)
   end
 
+  def ring() do
+    {:ok, ring} = :riak_core_ring_manager.get_my_ring()
+    :riak_core_ring.pretty_print(ring, [:legend])
+  end
+  
   
   ##== Auxiliary functions ================================================
   defp hash_key(key) do

@@ -6,6 +6,10 @@ FROM $DKR_IMAGE
 EXPOSE 4369/tcp
 # Distributed Erlang port
 EXPOSE 9000/tcp
+# Riak Core hand-off port
+EXPOSE 8099/tcp
+# RicoPing HTTP interface port
+EXPOSE 8080/tcp
 
 ARG MIX_ENV
 

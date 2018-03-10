@@ -6,9 +6,33 @@ A simple Riak Core application written in Elixir.
 
 ## Usage
 
-```elixir
-RicoPing.ping
-# => {:pong, 1004782375664995756265033322492444576013453623296}
+```bash
+# Build the Docker image
+make package
+```
+
+```bash
+# Bring up a 3-node cluster
+make up
+```
+
+```bash
+# Send PING requests to rico_ping1
+curl -X GET http://localhost:8081/ping
+# => {:pong, [{639406966332270026714112114313373821099470487552, :"rico_ping@rico_ping1.local"}]}%
+
+# Send PING requests to rico_ping2
+curl -X GET http://localhost:8082/ping
+# => {:pong, [{639406966332270026714112114313373821099470487552, :"rico_ping@rico_ping1.local"}]}%
+
+# Send PING requests to rico_ping3
+curl -X GET http://localhost:8083/ping
+# => {:pong, [{639406966332270026714112114313373821099470487552, :"rico_ping@rico_ping1.local"}]}%
+```
+
+```bash
+# Bring down the cluster
+make down
 ```
 
 
