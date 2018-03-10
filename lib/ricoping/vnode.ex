@@ -78,6 +78,16 @@ defmodule RicoPing.VNode do
     {:stop, :not_implemented, state}
   end
 
+  def handle_overload_command(_command, _sender, _idx) do
+    Logger.debug "handle_overload_command/3"
+    :ok
+  end
+  
+  def handle_overload_info(_command, _idx) do
+    Logger.debug "handle_overload_info/2"
+    :ok
+  end
+  
   def handle_exit(_pid, _reason, state) do
     Logger.debug "handle_exit/3"
     {:noreply, state}
