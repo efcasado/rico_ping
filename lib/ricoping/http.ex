@@ -15,7 +15,8 @@ defmodule RicoPing.HTTP do
 
   ##== API ================================================================
   def start_link() do
-    Plug.Adapters.Cowboy2.http __MODULE__, [], port: 8080
+    port = Application :rico_ping, :port, 8080)
+    Plug.Adapters.Cowboy2.http __MODULE__, [], port: port
   end
 
 

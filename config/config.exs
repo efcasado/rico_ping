@@ -1,5 +1,8 @@
 use Mix.Config
 
+config :rico_ping,
+  http_port: 8080
+
 config :riak_core,
   ring_state_dir: 'ring_data_dir',
   ring_creation_size: 64
