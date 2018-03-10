@@ -82,7 +82,7 @@ defmodule RicoPing.VNode do
 
   def handle_coverage(_req, _key_spaces, _sender, state) do
     Logger.debug "handle_coverage/4"
-    {:stop, :not_implemented, state}
+    {:noreply, state}
   end
 
   def handle_overload_command(_command, _sender, _idx) do
