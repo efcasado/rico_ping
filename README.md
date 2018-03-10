@@ -14,6 +14,23 @@ make package
 ```bash
 # Bring up a 3-node cluster
 make up
+
+make cluster
+# => {ok,['rico_ping@rico_ping1.local']}
+
+make ring
+# =>
+# ==================================== Nodes ====================================
+# Node a: 64 (100.0%) rico_ping@rico_ping1.local
+# ==================================== Ring =====================================
+# aaaa|aaaa|aaaa|aaaa|aaaa|aaaa|aaaa|aaaa|aaaa|aaaa|aaaa|aaaa|aaaa|aaaa|aaaa|aaaa|
+# ok
+
+make join
+
+make cluster
+# => {ok,['rico_ping@rico_ping1.local','rico_ping@rico_ping2.local',
+#         'rico_ping@rico_ping3.local']}
 ```
 
 ```bash
