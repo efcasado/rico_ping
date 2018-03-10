@@ -23,7 +23,7 @@ DKR_RUN_OPTS  ?= -v "$(PWD):/$(PWD)" \
  -w "/$(PWD)"                        \
  --rm
 
-CLUSTER_SIZE  := 3
+CLUSTER_SIZE  ?= 5
 
 
 ##== Macros ===============================================================
