@@ -4,13 +4,20 @@ defmodule RicoPing.Mixfile do
   def project do
     [
       app: :rico_ping,
-      version: "0.1.0",
+      version: version(),
       elixir: "~> 1.5",
       start_permanent: Mix.env == :prod,
       deps: deps()
     ]
   end
 
+  def version do
+    case System.cmd("git", ["describe", "--exact-match", "--tags", "git log -n1 --pretty='%h'"]) do
+      {vsn, 0} -> vsn
+      {_,   _} -> "0.1.0"
+    end
+  end
+  
   def application do
     [
       extra_applications: [:logger],

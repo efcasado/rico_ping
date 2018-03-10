@@ -1,5 +1,6 @@
 # RicoPing
-[![CircleCI](https://circleci.com/gh/efcasado/rico_ping.svg?style=svg)](https://circleci.com/gh/efcasado/rico_ping)
+
+![GitHub (pre-)release](https://img.shields.io/github/release/efcasado/rico_ping/all.svg) [![CircleCI](https://circleci.com/gh/efcasado/rico_ping.svg?style=svg)](https://circleci.com/gh/efcasado/rico_ping)
 
 A simple Riak Core application written in Elixir.
 
