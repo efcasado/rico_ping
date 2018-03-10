@@ -23,12 +23,12 @@ defmodule RicoPing.VNode do
     {:ok, %{:partition => partition}}
   end
 
-  def handle_command(ping, _sender, state = %{:partition => partition}) do
+  def handle_command(:ping, _sender, state = %{:partition => partition}) do
     Logger.debug "handle_command/3"
     res = {:pong, [{partition, node()}]}
     {:reply, res, state}
   end
-  def handle_command(message, _sender, state) do
+  def handle_command(:message, _sender, state) do
     Logger.debug "handle_command/3"
     {:noreply, state}
   end
