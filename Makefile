@@ -121,8 +121,17 @@ rico_ping1           \
 ring:
 	@docker exec \
 rico_ping1           \
-/opt/rico_ping/bin/rico_ping rpc 'Elixir.RicoPing' ring
+/opt/rico_ping/bin/rico_ping rpc 'Elixir.RicoPing.Console' ring
 
+ring_status:
+	@docker exec \
+rico_ping1           \
+/opt/rico_ping/bin/rico_ping rpc 'Elixir.RicoPing.Console' ring_status
+
+member_status:
+	@docker exec \
+rico_ping1           \
+/opt/rico_ping/bin/rico_ping rpc 'Elixir.RicoPing.Console' member_status
 
 down:
 	-@for i in {1..$(CLUSTER_SIZE)}; do docker rm -f rico_ping$$i; done

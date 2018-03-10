@@ -20,7 +20,7 @@ defmodule RicoPing.VNode do
 
   def init([partition]) do
     Logger.debug "init/1"
-    {:ok, %{:partition => partition}}
+    {:ok, %{partition: partition}}
   end
 
   def handle_command(:ping, _sender, state = %{:partition => partition}) do
@@ -33,6 +33,13 @@ defmodule RicoPing.VNode do
     {:noreply, state}
   end
 
+
+  require Record
+  Record.defrecord(:fold_req_v1, :riak_core_fold_req_v1,
+    Record.extract(:riak_core_fold_req_v1, from_lib: "riak_core/include/riak_core_vnode.hrl"))
+  Record.defrecord(:fold_req_v2, :riak_core_fold_req_v2,
+    Record.extract(:riak_core_fold_req_v2, from_lib: "riak_core/include/riak_core_vnode.hrl"))
+  
   def handle_handoff_command(_message, _sender, state) do
     Logger.debug "handle_handoff_command/3"
     {:noreply, state}
@@ -58,9 +65,9 @@ defmodule RicoPing.VNode do
     {:reply, :ok, state}
   end
 
-  def encode_handoff_item(_objname, _objvalue) do
+  def encode_handoff_item(objname, objvalue) do
     Logger.debug "encode_handoff_item/2"
-    ""
+    :erlang.term_to_binary({objname, objvalue})
   end
 
   def is_empty(state) do
