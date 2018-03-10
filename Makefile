@@ -80,11 +80,7 @@ shell:
 console:
 	$(call BIN, _build/$(MIX_ENV)/rel/rico_ping/bin/rico_ping console)
 
-package: clean
-	USE_DOCKER=1 MIX_ENV=prod $(MAKE) all
-	MIX_ENV=prod $(MAKE) package-docker
-
-package-docker:
+package:
 	docker build               \
 -t rico_ping                       \
 --build-arg DKR_IMAGE=$(DKR_IMAGE) \
