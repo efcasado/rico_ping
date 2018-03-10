@@ -8,6 +8,7 @@
 ### Copyright (c) 2018, Enrique Fernandez
 ###========================================================================
 .PHONY: all deps compile rel shell console package package-docker
+.PHONY: up down ringready ring
 .PHONY: clean clean-data
 
 
@@ -21,6 +22,8 @@ DKR_RUN_OPTS  ?= -v "$(PWD):/$(PWD)" \
  -e "MIX_ENV=$(MIX_ENV)"             \
  -w "/$(PWD)"                        \
  --rm
+
+CLUSTER_SIZE  := 3
 
 
 ##== Macros ===============================================================
@@ -80,7 +83,46 @@ console:
 package: package-docker
 
 package-docker:
-	docker build -t rico_ping --build-arg DKR_IMAGE=$(DKR_IMAGE) --build-arg MIX_ENV=$(MIX_ENV) .
+	docker build               \
+-t rico_ping                       \
+--build-arg DKR_IMAGE=$(DKR_IMAGE) \
+--build-arg MIX_ENV=$(MIX_ENV)     \
+.
+
+up:
+	docker network create rico_ping
+
+	@for i in {1..$(CLUSTER_SIZE)}; do            \
+		docker run                            \
+                  -d                                  \
+                  --rm                                \
+                  --name rico_ping$$i                 \
+                  --network rico_ping                 \
+                  --network-alias rico_ping$$i.local  \
+                  --hostname rico_ping$$i.local       \
+                  rico_ping:latest ;                  \
+	done
+
+	@for i in {2..$(CLUSTER_SIZE)}; do            \
+		docker exec                           \
+	          rico_ping$$i                        \
+                  /opt/rico_ping/bin/rico_ping rpc riak_core join rico_ping@rico_ping1.local ; \
+	done
+
+ringready:
+	docker exec \
+rico_ping1          \
+/opt/rico_ping/bin/rico_ping rpc riak_core_status ringready
+
+ring:
+	docker exec \
+rico_ping1          \
+/opt/rico_ping/bin/rico_ping rpc riak_core_ring_manager get_my_ring
+
+
+down:
+	-for i in {1..$(CLUSTER_SIZE)}; do docker rm -f rico_ping$$i; done
+	-docker network rm rico_ping
 
 clean: clean-data
 	rm -rf _build/
