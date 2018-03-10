@@ -14,13 +14,13 @@ defmodule RicoPing.VNode do
 
   ##== VNode callbacks ====================================================
   def start_vnode(idx) do
-    Logger.debug "start_vnode/1"
+    Logger.debug "start_vnode/1 | idx=#{idx}"
     :riak_core_vnode_master.get_vnode_pid(idx, __MODULE__)
   end
 
-  def init([partition]) do
-    Logger.debug "init/1"
-    {:ok, %{partition: partition}}
+  def init([idx]) do
+    Logger.debug "init/1 | idx=#{idx}"
+    {:ok, %{partition: idx}}
   end
 
   def handle_command(:ping, _sender, state = %{:partition => partition}) do
