@@ -7,7 +7,8 @@
 ###
 ### Copyright (c) 2018, Enrique Fernandez
 ###========================================================================
-.PHONY: all deps compile rel shell console package package-docker clean
+.PHONY: all deps compile rel shell console package package-docker
+.PHONY: clean clean-data
 
 
 ##== Settings =============================================================
@@ -59,7 +60,7 @@ endif
 
 
 ##== Targets ==============================================================
-all: deps compile
+all: deps compile rel
 
 deps:
 	$(call MIX, deps.get)
@@ -81,11 +82,13 @@ package: package-docker
 package-docker:
 	docker build -t rico_ping --build-arg DKR_IMAGE=$(DKR_IMAGE) --build-arg MIX_ENV=$(MIX_ENV) .
 
-clean:
+clean: clean-data
+	rm -rf _build/
+	$(call MIX, deps.clean --all)
+
+clean-data:
 	rm -rf data_root
 	rm -rf data.*
 	rm -rf log
 	rm -rf log.*
 	rm -rf ring_data_dir
-	rm -rf _build/
-	$(call MIX, deps.clean --all)
