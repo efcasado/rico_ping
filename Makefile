@@ -106,22 +106,21 @@ up:
                   rico_ping:latest ;                  \
 	done
 
-	sleep 5
-
+join:
 	@for i in {2..$(CLUSTER_SIZE)}; do            \
 		docker exec                           \
 	          rico_ping$$i                        \
                   /opt/rico_ping/bin/rico_ping rpc riak_core join rico_ping@rico_ping1.local ; \
 	done
 
-ringready:
+cluster:
 	@docker exec \
-rico_ping1          \
+rico_ping1           \
 /opt/rico_ping/bin/rico_ping rpc riak_core_status ringready
 
 ring:
 	@docker exec \
-rico_ping1          \
+rico_ping1           \
 /opt/rico_ping/bin/rico_ping rpc 'Elixir.RicoPing' ring
 
 
