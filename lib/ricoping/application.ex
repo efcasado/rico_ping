@@ -6,7 +6,7 @@ defmodule RicoPing.Application do
 
   ##== Appliaction callbacks ==============================================
   def start(_type, _args) do
-    :ok = :riak_core.register([{:vnode_module, RicoPing.VNode}])
+    :ok = :riak_core.register(RicoPing, [{:vnode_module, RicoPing.VNode}])
     :ok = :riak_core_node_watcher.service_up(RicoPing, self())
 
     import Supervisor.Spec, warn: false
