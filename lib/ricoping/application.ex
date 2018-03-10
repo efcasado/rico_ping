@@ -11,7 +11,8 @@ defmodule RicoPing.Application do
 
     import Supervisor.Spec, warn: false
     children = [
-      worker(:riak_core_vnode_master, [RicoPing.VNode]),
+      worker(RicoPing.HTTP, []),
+      worker(:riak_core_vnode_master, [RicoPing.VNode])
     ]
 
     opts = [strategy: :one_for_one, name: RicoPing.Supervisor]

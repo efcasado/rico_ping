@@ -29,7 +29,7 @@ CLUSTER_SIZE  := 3
 ##== Macros ===============================================================
 ifeq ($(strip $(USE_DOCKER)),1)
 define BIN
-	@docker run $(DKR_RUN_OPTS) -it $(DKR_IMAGE) $(1)
+	@docker run $(DKR_RUN_OPTS) -it -p 8080:8080 $(DKR_IMAGE) $(1)
 endef
 else
 define BIN
@@ -130,7 +130,16 @@ clean: clean-data
 
 clean-data:
 	rm -rf data_root
+	rm -rf data
 	rm -rf data.*
 	rm -rf log
 	rm -rf log.*
 	rm -rf ring_data_dir
+
+	rm -rf _build/prod/rel/rico_ping/data_root
+	rm -rf _build/prod/rel/rico_ping/data
+	rm -rf _build/prod/rel/rico_ping/data.*
+	rm -rf _build/prod/rel/rico_ping/log
+	rm -rf _build/prod/rel/rico_ping/log.*
+	rm -rf _build/prod/rel/rico_ping/ring_data_dir
+

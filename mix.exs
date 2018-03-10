@@ -25,6 +25,8 @@ defmodule RicoPing.Mixfile do
       {:lager        , "~>3.2", override: true},
       {:cuttlefish   , github: "lasp-lang/cuttlefish"   , branch: "develop", override: true},
       {:poolboy      , github: "basho/poolboy"          , branch: "develop", override: true},
+      {:plug         , "1.5.0-rc.2"},
+      {:cowboy       , "~> 2.2"},
       # Release
       {:distillery, "~> 1.5"},
     ]
