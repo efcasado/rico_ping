@@ -12,12 +12,11 @@ defmodule RicoPing.Mixfile do
   end
 
   def version do
-    case System.cmd("git", ["log", "-n1", "--pretty='%h'"]) do
+    case System.cmd("git", ["rev-list", "--tags", "--max-count=1"]) do
       {last, 0} ->
         last = String.trim(last)
-        IO.puts last
         case System.cmd("git", ["describe", "--exact-match", "--tags", last]) do
-          {"v" <> vsn, 0} -> vsn
+          {"v" <> vsn, 0} -> String.trim(vsn)
           {_,   _} -> "0.1.0"
         end
       {_,   _} -> "0.1.0"
