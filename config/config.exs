@@ -13,7 +13,7 @@ config :rico_ping,
 
 config :riak_core,
   ring_state_dir: 'ring_data_dir',
-  ring_creation_size: 16
+  ring_creation_size: 64
 
 config :kernel,
   inet_dist_listen_min: 9000,
